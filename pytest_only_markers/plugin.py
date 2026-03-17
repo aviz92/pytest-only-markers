@@ -29,7 +29,10 @@ def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item
         return
 
     for item in items:
-        only_markers: list[Mark] = [m for m in item.own_markers if m.name.startswith(DEFAULT_PREFIX)]
+        only_markers: list[Mark] = [
+            m for m in item.own_markers
+            if m.name.upper().startswith(DEFAULT_PREFIX)
+        ]
         if not only_markers:
             continue
 

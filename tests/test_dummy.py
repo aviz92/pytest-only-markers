@@ -17,7 +17,7 @@ def test_dummy():
 
 
 class TestDummyClass:
-    @pytest.mark.ONLY_dummy_x
+    @pytest.mark.only_dummy_x
     def test_dummy_method(self):
         logger.info("Running test_dummy_method")
         assert True
