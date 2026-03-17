@@ -34,7 +34,7 @@ def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item
             continue
 
         item.own_markers[:] = only_markers
-        item.iter_markers = lambda name=None: (
-            iter(only_markers) if name is None
-            else (m for m in only_markers if m.name == name)
+        item.iter_markers = lambda name=None, _markers=only_markers: (
+            iter(_markers) if name is None
+            else (m for m in _markers if m.name == name)
         )

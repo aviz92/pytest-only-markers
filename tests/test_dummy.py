@@ -14,3 +14,16 @@ pytestmark = [
 def test_dummy():
     logger.info("Running test_dummy")
     assert True
+
+
+class TestDummyClass:
+    @pytest.mark.ONLY_X
+    def test_dummy_method(self):
+        logger.info("Running test_dummy_method")
+        assert True
+
+
+class TestDummyClassWithFixture:
+    def test_dummy_with_fixture(self):
+        logger.info("Running test_dummy_with_fixture")
+        assert True
