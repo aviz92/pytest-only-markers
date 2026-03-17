@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pytest-only-markers"
-version = "1.0.0"
+version = "1.0.1"
 description = "A pytest plugin that isolates test execution to only tests decorated with ONLY_* markers, stripping all other markers from matching items."
 readme = "README.md"
 requires-python = ">=3.11"
