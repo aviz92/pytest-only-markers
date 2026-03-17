@@ -1,7 +1,16 @@
-class TestDummy:
-    def test_dummy1(self) -> None:
-        assert 1 == 1  # pylint: disable=R0133,R0124
+import pytest
 
+from custom_python_logger import get_logger, build_logger
 
-def test_dummy2() -> None:
-    assert 1 == 1  # pylint: disable=R0133,R0124
+logger = build_logger(__name__)
+
+pytestmark = [
+    pytest.mark.regular,
+    pytest.mark.dummy,
+]
+
+@pytest.mark.ONLY_X
+@pytest.mark.ONLY_Y
+def test_dummy():
+    logger.info("Running test_dummy")
+    assert True

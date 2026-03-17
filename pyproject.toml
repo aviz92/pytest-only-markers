@@ -33,7 +33,7 @@ dependencies = [
     "pytest-collect-requirements==0.0.3",
     "pytest-depends-on==1.0.0",
     "pytest-dynamic-parameterize==1.0.3",
-    "pytest-plugins==2.0.0",
+    "pytest-plugins==2.0.2",
     "python-base-toolkit==0.0.17",
     "python-custom-exceptions==0.0.2",
     "python-databases==0.1.7",
@@ -65,3 +65,6 @@ namespaces = false
 run_pytest_marker = "scripts.ci.run_pytest_marker:main"
 clean_pycache = "scripts.django.clean__pycache__:main"
 clean_migrations = "scripts.django.clean_migrations:main"
+
+[project.entry-points."pytest11"]
+only-markers = "pytest_only_markers.plugin"
