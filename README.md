@@ -9,7 +9,7 @@
 
 # 💡 pytest-only-markers
 A pytest plugin that lets you isolate specific tests using `ONLY_*` markers.
-When any test is decorated with a marker prefixed `ONLY_`, only those tests are collected and run — all other tests (and their inherited `pytestmark` markers) are suppressed.
+When any test is decorated with a marker prefixed `ONLY_` (case-insensitive: `ONLY_` or `only_`), only those tests are collected and run — all other tests (and their inherited `pytestmark` markers) are suppressed.
 
 ---
 
@@ -22,6 +22,7 @@ uv add pytest-only-markers
 
 ## 🚀 Features
 - ✅ **Selective collection** — only tests carrying an `ONLY_*` marker are collected; all others are deselected
+- ✅ **Case-insensitive prefix** — both `ONLY_*` and `only_*` are recognised (e.g. `@pytest.mark.ONLY_smoke` and `@pytest.mark.only_smoke` are equivalent)
 - ✅ **Marker isolation** — non-`ONLY_*` markers (including module-level `pytestmark`) are stripped from matching items
 - ✅ **Transparent deselection** — skipped tests appear in pytest's `x deselected` summary, not silently dropped
 - ✅ **Instance-level patch** — `iter_markers` is patched per item so downstream plugins see only `ONLY_*` markers
@@ -32,7 +33,7 @@ uv add pytest-only-markers
 ## 🛠️ How to Use
 1. Install the plugin via `uv add pytest-only-markers`
 2. Enable it by adding `--only-markers-prefix` to your `pytest.ini` or passing it on the CLI
-3. Decorate any test with `@pytest.mark.ONLY_<name>` to mark it for isolated execution
+3. Decorate any test with `@pytest.mark.ONLY_<name>` (or `@pytest.mark.only_<name>`) to mark it for isolated execution
 4. Run pytest — only tests with `ONLY_*` markers will be collected and executed
 
 ---
@@ -93,7 +94,20 @@ def test_create_user():
 # pytestmark (dummy) is stripped
 ```
 
-### Example 3: CLI usage without modifying pytest.ini
+### Example 3: Case-insensitive prefix
+```python
+import pytest
+
+@pytest.mark.only_smoke   # lowercase — works the same as ONLY_smoke
+def test_ping():
+    assert True
+
+@pytest.mark.ONLY_smoke   # uppercase — equivalent
+def test_pong():
+    assert True
+```
+
+### Example 4: CLI usage without modifying pytest.ini
 ```bash
 pytest --only-markers-prefix tests/
 ```
